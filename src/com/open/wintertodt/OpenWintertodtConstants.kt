@@ -106,6 +106,7 @@ object OpenWintertodtConstants {
     const val MESSAGE_OUT = "The brazier has gone out."
     const val MESSAGE_COLD = "The cold of the Wintertodt seeps into your bones."
     const val MESSAGE_NO_BRUMA_ROOTS = "You have run out of bruma roots."
+    val MESSAGES_BROKEN_EVENT = arrayOf(MESSAGE_BROKEN, MESSAGE_OUT, MESSAGE_COLD, MESSAGE_NO_BRUMA_ROOTS)
 
     const val LEAVE_EARLY_PERCENT =4
 

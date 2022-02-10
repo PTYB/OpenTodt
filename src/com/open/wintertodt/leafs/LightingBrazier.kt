@@ -6,6 +6,7 @@ import com.open.wintertodt.OpenWintertodtConstants.ACTION_FIX
 import com.open.wintertodt.OpenWintertodtConstants.ACTION_LIGHT
 import com.open.wintertodt.OpenWintertodtConstants.ITEM_BRUMA_KINDLING
 import com.open.wintertodt.OpenWintertodtConstants.ITEM_BRUMA_ROOT
+import com.open.wintertodt.OpenWintertodtConstants.MESSAGES_BROKEN_EVENT
 import com.open.wintertodt.OpenWintertodtConstants.MESSAGE_BROKEN
 import com.open.wintertodt.OpenWintertodtConstants.MESSAGE_COLD
 import com.open.wintertodt.OpenWintertodtConstants.MESSAGE_NO_BRUMA_ROOTS
@@ -60,7 +61,7 @@ class LightingBrazier(script: Script) : Leaf<Script>(script, "Lighting brazier")
     }
 
     private fun waitForLighting(startingHp: Int): Boolean {
-        val waitTimer = MessageListener(1, arrayOf(MESSAGE_BROKEN, MESSAGE_OUT, MESSAGE_COLD, MESSAGE_NO_BRUMA_ROOTS), 120000)
+        val waitTimer = MessageListener(1, MESSAGES_BROKEN_EVENT, 120000)
         SystemMessageManager.addMessageToListen(waitTimer)
         val times = Inventory.count(ITEM_BRUMA_KINDLING, ITEM_BRUMA_ROOT)
         for (i in 0..times) {
@@ -104,7 +105,7 @@ class LightingBrazier(script: Script) : Leaf<Script>(script, "Lighting brazier")
             ), script.status.currentLocation.brazierY
         )
         val result = Movement.builder(tile)
-            .setWalkUntil { tile.distance() < 2.5 && tile.matrix().inViewport()}
+            .setWalkUntil { tile.distance() < 2.5 && tile.matrix().inViewport() }
             .move()
 
         if (!result.success) {

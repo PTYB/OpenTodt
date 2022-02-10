@@ -14,17 +14,18 @@ import org.powbot.api.rt4.*
 import org.powbot.api.script.tree.Leaf
 
 class LightInitialFire(script: Script) : Leaf<Script>(script, "Light initial fire") {
-
     private val currentLocation: WintertodtLocation get() = script.status.currentLocation
 
     override fun execute() {
-        if (currentLocation.brazierTile.distanceTo(Players.local()) >= 2.5) {
+        val brazierTile = currentLocation.brazierTile
+        if (Players.local().y() != currentLocation.brazierY || brazierTile.distanceTo(Players.local()) >= 2.5) {
             val xPos = Random.nextInt(currentLocation.minBrazierX, currentLocation.maxBrazierX)
             val tile = Tile(xPos, currentLocation.brazierY)
-            Movement.builder(tile).setWalkUntil { tile.distance() <= 2.5 }.move()
+            Movement.builder(tile).setWalkUntil { Players.local().y() == currentLocation.brazierY }.move()
         }
 
-        if (currentLocation.brazierTile.distanceTo(Players.local()) <= 2.5 && shouldLightInitialFire()) {
+        if (brazierTile.distanceTo(Players.local()) <= 2.5 && shouldLightInitialFire()) {
+
             val brazier = getBrazier()
             if (brazier.interact(ACTION_LIGHT, Game.singleTapEnabled())) {
                 Condition.wait(Conditions.expGained(Constants.SKILLS_FIREMAKING))

@@ -14,7 +14,7 @@ class OpenBank(script: Script) : Leaf<Script>(script, "Opening bank") {
     override fun execute() {
         val bankChest = Objects.nearestGameObject("Bank chest")
 
-        if (bankChest.inViewport() && bankChest.interact("Bank")) {
+        if (bankChest.inViewport(true) && bankChest.interact("Bank")) {
             Condition.wait ({ Players.local().inMotion() || Bank.opened() }, 500, 5)
             Condition.wait({ !Players.local().inMotion() || Bank.opened() }, 500, 15)
         } else {
