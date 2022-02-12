@@ -39,9 +39,8 @@ class LightInitialFire(script: Script) : Leaf<Script>(script, "Light initial fir
     }
 
     private fun getBrazier(): GameObject {
-        return Objects.stream()
+        return Objects.stream(currentLocation.brazierTile, 4, GameObject.Type.INTERACTIVE)
             .name(OBJECT_BURNING_BRAZIER, OBJECT_BRAZIER)
-            .at(currentLocation.brazierTile)
             .nearest()
             .first()
     }

@@ -21,6 +21,9 @@ class OpenBank(script: Script) : Leaf<Script>(script, "Opening bank") {
             Movement.builder(BANK_TODT)
                 .setWalkUntil { BANK_TODT.matrix().inViewport(true)}
                 .move()
+            if (BANK_TODT.distance() > 5 && !Players.local().inMotion()) {
+                Movement.step(BANK_TODT, 1)
+            }
         }
     }
 }

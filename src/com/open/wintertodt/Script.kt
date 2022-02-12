@@ -25,7 +25,7 @@ import org.powbot.mobile.service.ScriptUploader
 @ScriptManifest(
     name = "Opentodt",
     description = "Does wintertodt.",
-    version = "1.0.0",
+    version = "1.0.1",
     category = ScriptCategory.Firemaking,
     author = "PTY",
     markdownFileName = "Opentodt.md"
@@ -62,6 +62,9 @@ import org.powbot.mobile.service.ScriptUploader
         ScriptConfiguration(
             "Idle at 500", "Idle at 500", OptionType.BOOLEAN
         ),
+        ScriptConfiguration(
+            "Snowfall safespot", "Uses the snowfall safespot for cutting/fletching", OptionType.BOOLEAN
+        ),
     ]
 )
 class Script : TreeScript() {
@@ -81,9 +84,10 @@ class Script : TreeScript() {
         val location = WintertodtLocation.valueOf(getOption<String>("Location")!!)
         val minimumFood = getOption<Int>("MinFood")!!
         val bankFood = getOption<Int>("BankFood")!!
+        val snowfallSafespot = getOption<Boolean>("Snowfall safespot")!!
 
         configuration = Configuration(food, bankFood, minimumFood, location, logsOnly,
-            idleAt500)
+            idleAt500, snowfallSafespot)
         status = Status(configuration.startingLocation)
         addPaint()
         checkSetupInventory(configuration.logsOnly, configuration.foodName)

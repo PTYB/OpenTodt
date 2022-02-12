@@ -24,36 +24,10 @@ object OpenWintertodtConstants {
     val TILE_SE_BRAZIER = Tile(1639, 3998, 0)
     val TILE_NE_BRAZIER = Tile(1639, 4016)
 
-    val TILE_SW_ROOTS_SURROUNDING = listOf(
-        Tile(1643, 4019),
-        Tile(1620, 3989),
-        Tile(1621, 3989),
-        Tile(1622, 3988),
-        Tile(1622, 3987)
-    )
-
-    val TILE_SE_ROOTS_SURROUNDING = listOf(
-        Tile(1638, 3987),
-        Tile(1638, 3988),
-        Tile(1639, 3989),
-        Tile(1640, 3989),
-        Tile(1641, 3988)
-    )
-    val TILE_NW_ROOTS_SURROUNDING = listOf(
-        Tile(1623, 4025),
-        Tile(1623, 4024),
-        Tile(1621, 4023),
-        Tile(1622, 4023),
-        Tile(1620, 4024)
-    )
-
-    val TILE_NE_ROOTS_SURROUNDING = listOf(
-        Tile(1637, 4025),
-        Tile(1637, 4024),
-        Tile(1638, 4023),
-        Tile(1639, 4023),
-        Tile(1640, 4024),
-    )
+    val TILE_SE_SAFESPOT = Tile(1638, 3988, 0)
+    val TILE_SW_SAFESPOT = Tile(1622, 3988, 0)
+    val TILE_NW_SAFESPOT = Tile(1620,4025,0)
+    val TILE_NE_SAFESPOT = Tile(1640, 4025,0)
 
     val VARPBIT_RESPAWN = 1142
 
@@ -107,9 +81,6 @@ object OpenWintertodtConstants {
     const val MESSAGE_COLD = "The cold of the Wintertodt seeps into your bones."
     const val MESSAGE_NO_BRUMA_ROOTS = "You have run out of bruma roots."
     val MESSAGES_BROKEN_EVENT = arrayOf(MESSAGE_BROKEN, MESSAGE_OUT, MESSAGE_COLD, MESSAGE_NO_BRUMA_ROOTS)
-
-    const val LEAVE_EARLY_PERCENT =4
-
 
     const val ITEM_DRAGON_AXE = "Dragon axe"
     const val ITEM_RUNE_AXE = "Rune axe"

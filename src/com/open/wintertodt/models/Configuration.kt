@@ -7,6 +7,7 @@ class Configuration(
     val startingLocation: WintertodtLocation,
     val logsOnly: Boolean,
     val idleAtFiveHundred: Boolean,
+    val snowfallSafespot: Boolean,
 ) {
     val healthRestorePercent = 65
 

@@ -49,7 +49,7 @@ class ShouldStartLightingInventory(script: Script) : Branch<Script>(script, "Lig
     private var logger: Logger = Logger.getLogger(this.javaClass.simpleName)
 
     override val successComponent: TreeComponent<Script> = CanLightFire(script)
-    override val failedComponent: TreeComponent<Script> = ShouldChopVines(script)
+    override val failedComponent: TreeComponent<Script> = ShouldWalkToSafespot(script)
 
     // TODO Figure out how to split it better between different configurations without duplicate counts
     override fun validate(): Boolean {
@@ -90,6 +90,16 @@ class CanLightFire(script: Script) : Branch<Script>(script, "Can light fire") {
         return isBrazierAlive(script.status.currentLocation) || !isPyromancerDead(script.status.currentLocation)
     }
 
+}
+
+class ShouldWalkToSafespot(script: Script) : Branch<Script>(script, "Should walk to safespot"){
+    override val successComponent: TreeComponent<Script> = WalkToSafespot(script)
+    override val failedComponent: TreeComponent<Script> = ShouldChopVines(script)
+
+    override fun validate(): Boolean {
+        return script.configuration.snowfallSafespot &&
+                Players.local().tile() != script.status.currentLocation.safespotTile
+    }
 }
 
 class ShouldChopVines(script: Script) : Branch<Script>(script, "Should chop vines") {
