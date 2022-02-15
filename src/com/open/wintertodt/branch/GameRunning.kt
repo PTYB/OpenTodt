@@ -1,6 +1,7 @@
 package com.open.wintertodt.branch
 
 import com.open.wintertodt.OpenWintertodtConstants
+import com.open.wintertodt.OpenWintertodtConstants.AREA_NEAR_DOOR
 import com.open.wintertodt.OpenWintertodtConstants.ITEM_BRUMA_KINDLING
 import com.open.wintertodt.OpenWintertodtConstants.ITEM_BRUMA_ROOT
 import com.open.wintertodt.Script
@@ -37,10 +38,21 @@ class ShouldIdleAtFiveHundred(script: Script) : Branch<Script>(script, "Should i
 
 class NeedsToEat(script: Script) : Branch<Script>(script, "Needs to eat") {
     override val successComponent: TreeComponent<Script> = HasFoodToEat(script)
-    override val failedComponent: TreeComponent<Script> = ShouldStartLightingInventory(script)
+    override val failedComponent: TreeComponent<Script> = ShouldStayInSafeZone(script)
 
     override fun validate(): Boolean {
         return FoodHelper.needToEat(script)
+    }
+}
+
+class ShouldStayInSafeZone(script: Script) : Branch<Script>(script, "Is in safezone") {
+    override val successComponent: TreeComponent<Script> = IdleInSafezone(script)
+    override val failedComponent: TreeComponent<Script> = ShouldStartLightingInventory(script)
+
+    override fun validate(): Boolean {
+        return AREA_NEAR_DOOR.contains(Players.local()) && Inventory.stream()
+            .name(*FoodHelper.getFoodInformation(script.configuration.foodName))
+            .count() <= 0
     }
 }
 
@@ -67,12 +79,10 @@ class ShouldStartLightingInventory(script: Script) : Branch<Script>(script, "Lig
         } else if (inventoryFull && rootCount == 0) {
             result = true
             logger.info("Lighting full kindling")
-        }
-        else if (rootCount == 0 && kindlingCount > 0) {
+        } else if (rootCount == 0 && kindlingCount > 0) {
             result = true
             logger.info("Lighting since no logs to fletch")
-        }
-        else if (rootCount + kindlingCount >= remainingHealthPercentage()) {
+        } else if (rootCount + kindlingCount >= remainingHealthPercentage()) {
             logger.info("Lighting because $rootCount, $kindlingCount, ${remainingHealthPercentage()}%")
             result = true
         }
@@ -92,7 +102,7 @@ class CanLightFire(script: Script) : Branch<Script>(script, "Can light fire") {
 
 }
 
-class ShouldWalkToSafespot(script: Script) : Branch<Script>(script, "Should walk to safespot"){
+class ShouldWalkToSafespot(script: Script) : Branch<Script>(script, "Should walk to safespot") {
     override val successComponent: TreeComponent<Script> = WalkToSafespot(script)
     override val failedComponent: TreeComponent<Script> = ShouldChopVines(script)
 

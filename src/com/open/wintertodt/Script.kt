@@ -2,14 +2,18 @@ package com.open.wintertodt
 
 import com.google.common.eventbus.Subscribe
 import com.open.wintertodt.branch.IsInside
+import com.open.wintertodt.helpers.CommonMethods
 import com.open.wintertodt.helpers.SystemMessageManager
 import com.open.wintertodt.models.Configuration
 import com.open.wintertodt.models.Status
 import com.open.wintertodt.models.WintertodtLocation
 import org.powbot.api.Notifications
+import org.powbot.api.Random
+import org.powbot.api.event.BreakEvent
 import org.powbot.api.event.MessageEvent
 import org.powbot.api.rt4.Equipment
 import org.powbot.api.rt4.Inventory
+import org.powbot.api.rt4.Varpbits
 import org.powbot.api.rt4.walking.model.Skill
 import org.powbot.api.script.OptionType
 import org.powbot.api.script.ScriptCategory
@@ -25,7 +29,7 @@ import org.powbot.mobile.service.ScriptUploader
 @ScriptManifest(
     name = "Opentodt",
     description = "Does wintertodt.",
-    version = "1.0.1",
+    version = "1.0.2",
     category = ScriptCategory.Firemaking,
     author = "PTY",
     markdownFileName = "Opentodt.md"
@@ -77,7 +81,6 @@ class Script : TreeScript() {
     lateinit var status: Status
 
     override fun onStart() {
-
         val food = getOption<String>("Food")!!
         val logsOnly = getOption<Boolean>("Logs only")!!
         val idleAt500 = getOption<Boolean>("Idle at 500")!!
@@ -86,8 +89,9 @@ class Script : TreeScript() {
         val bankFood = getOption<Int>("BankFood")!!
         val snowfallSafespot = getOption<Boolean>("Snowfall safespot")!!
 
-        configuration = Configuration(food, bankFood, minimumFood, location, logsOnly,
-            idleAt500, snowfallSafespot)
+        configuration = Configuration(
+            food, bankFood, minimumFood, location, logsOnly, idleAt500, snowfallSafespot
+        )
         status = Status(configuration.startingLocation)
         addPaint()
         checkSetupInventory(configuration.logsOnly, configuration.foodName)
@@ -135,8 +139,24 @@ class Script : TreeScript() {
      *  @param messageEvent The message received form the game.
      */
     @Subscribe
-    open fun message(messageEvent: MessageEvent) {
+    fun message(messageEvent: MessageEvent) {
         SystemMessageManager.messageRecieved(messageEvent)
+    }
+
+
+    /**
+     *  This will only let the script break when its not in a game currently
+     */
+    @Subscribe
+    fun breakEvent(breakEvent: BreakEvent) {
+        val gameRunning = Varpbits.varpbit(OpenWintertodtConstants.VARPBIT_RESPAWN) == 0
+        if (gameRunning) {
+            val remainingPercent = CommonMethods.remainingHealthPercentage()
+            val breakTime = if (remainingPercent < 5) Random.nextInt(5000, 8000) else remainingPercent * 1.5
+            breakEvent.delay(breakTime.toLong())
+        } else {
+            breakEvent.accept()
+        }
     }
 }
 

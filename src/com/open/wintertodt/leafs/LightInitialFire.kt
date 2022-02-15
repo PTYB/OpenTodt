@@ -25,7 +25,6 @@ class LightInitialFire(script: Script) : Leaf<Script>(script, "Light initial fir
         }
 
         if (brazierTile.distanceTo(Players.local()) <= 2.5 && shouldLightInitialFire()) {
-
             val brazier = getBrazier()
             if (brazier.interact(ACTION_LIGHT, Game.singleTapEnabled())) {
                 Condition.wait(Conditions.expGained(Constants.SKILLS_FIREMAKING))
