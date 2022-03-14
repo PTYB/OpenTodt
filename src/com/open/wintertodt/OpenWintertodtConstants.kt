@@ -26,50 +26,51 @@ object OpenWintertodtConstants {
 
     val TILE_SE_SAFESPOT = Tile(1638, 3988, 0)
     val TILE_SW_SAFESPOT = Tile(1622, 3988, 0)
-    val TILE_NW_SAFESPOT = Tile(1620,4025,0)
-    val TILE_NE_SAFESPOT = Tile(1640, 4025,0)
+    val TILE_NW_SAFESPOT = Tile(1620, 4025, 0)
+    val TILE_NE_SAFESPOT = Tile(1640, 4025, 0)
 
-    val VARPBIT_RESPAWN = 1142
+    const val VARPBIT_RESPAWN = 1142
 
-    val ACTION_CHOP = "Chop"
-    val ACTION_LIGHT = "Light"
-    val ACTION_FEED = "Feed"
-    val ACTION_FIX = "Fix"
-    val ACTION_ENTER = "Enter"
+    const val ACTION_CHOP = "Chop"
+    const val ACTION_LIGHT = "Light"
+    const val ACTION_FEED = "Feed"
+    const val ACTION_FIX = "Fix"
+    const val ACTION_ENTER = "Enter"
 
-    val TOOL_KNIFE: String = "Knife"
-    val TOOL_TINBERBOX: String = "Tinderbox"
-    val TOOL_HAMMER: String = "Hammer"
+    const val TOOL_KNIFE: String = "Knife"
+    const val TOOL_TINBERBOX: String = "Tinderbox"
+    const val TOOL_HAMMER: String = "Hammer"
 
-    val ITEM_BRUMA_ROOT = "Bruma root"
-    val ITEM_BRUMA_KINDLING = "Bruma kindling"
+    const val ITEM_BRUMA_ROOT = "Bruma root"
+    const val ITEM_BRUMA_KINDLING = "Bruma kindling"
+    const val ITEM_CRATE = "Supply crate"
 
-    val ID_SNOWFALL = 26690
+    const val ID_SNOWFALL = 26690
 
-    val OBJECT_BRUMA_ROOT = "Bruma roots"
-    val OBJECT_BRAZIER = "Brazier"
-    val OBJECT_BURNING_BRAZIER = "Burning brazier"
-    val OBJECT_DOOR = "Doors of Dinh"
+    const val OBJECT_BRUMA_ROOT = "Bruma roots"
+    const val OBJECT_BRAZIER = "Brazier"
+    const val OBJECT_BURNING_BRAZIER = "Burning brazier"
+    const val OBJECT_DOOR = "Doors of Dinh"
 
     val TILE_NEAR_DOOR_OUTSIDE = Tile(1630, 3963, 0)
     val TILE_NEAR_DOOR_INSIDE = Tile(1629, 3968, 0)
 
-    val WIDGETS_ROOT_ID = 396
-    val WIDGETS_POINTS = 7
-    val WIDGETS_SW_PYRO = 8
-    val WIDGETS_NW_PYRO = 9
-    val WIDGETS_NE_PYRO = 10
-    val WIDGETS_SE_PYRO = 11
-    val WIDGETS_SW_BURNER = 12
-    val WIDGETS_NW_BURNER = 13
-    val WIDGETS_NE_BURNER = 14
-    val WIDGETS_SE_BURNER = 15
-    val WIDGETS_ENERGY = 21
+    const val WIDGETS_ROOT_ID = 396
+    const val WIDGETS_POINTS = 7
+    const val WIDGETS_SW_PYRO = 8
+    const val WIDGETS_NW_PYRO = 9
+    const val WIDGETS_NE_PYRO = 10
+    const val WIDGETS_SE_PYRO = 11
+    const val WIDGETS_SW_BURNER = 12
+    const val WIDGETS_NW_BURNER = 13
+    const val WIDGETS_NE_BURNER = 14
+    const val WIDGETS_SE_BURNER = 15
+    const val WIDGETS_ENERGY = 21
 
-    val TEXTURE_BROKEN = 1397
-    val TEXTURE_UNBURNED = 1398
-    val TEXTURE_BURNING = 1399
-    val TEXTURE_PYROMANCERDEAD = 1400
+    const val TEXTURE_BROKEN = 1397
+    const val TEXTURE_UNBURNED = 1398
+    const val TEXTURE_BURNING = 1399
+    const val TEXTURE_PYROMANCERDEAD = 1400
 
     val AREA_NEAR_DOOR = Area(Tile(1628, 3967), Tile(1632, 3970))
 
@@ -90,4 +91,12 @@ object OpenWintertodtConstants {
     const val ITEM_STEEL_AXE = "Steel axe"
     const val ITEM_IRON_AXE = "Iron axe"
     const val ITEM_BRONZE_AXE = "Bronze axe"
+
+    const val ITEM_HOOD = "Pyromancer hood"
+    const val ITEM_GARB = "Pyromancer garb"
+    const val ITEM_ROBE = "Pyromancer robe"
+    const val ITEM_BOOTS = "Pyromancer boots"
+    const val ITEM_GLOVES = "Warm gloves"
+
+    val ITEMS_PYROMANCER = arrayOf(ITEM_HOOD, ITEM_GARB, ITEM_ROBE, ITEM_BOOTS, ITEM_GLOVES)
 }

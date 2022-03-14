@@ -8,6 +8,8 @@ class Configuration(
     val logsOnly: Boolean,
     val idleAtFiveHundred: Boolean,
     val snowfallSafespot: Boolean,
+    val openCrates: Boolean,
+    val upgradeGear: Boolean
 ) {
     val healthRestorePercent = 65
 

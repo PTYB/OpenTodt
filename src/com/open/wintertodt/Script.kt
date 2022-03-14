@@ -29,7 +29,7 @@ import org.powbot.mobile.service.ScriptUploader
 @ScriptManifest(
     name = "Opentodt",
     description = "Does wintertodt.",
-    version = "1.0.2",
+    version = "1.0.3",
     category = ScriptCategory.Firemaking,
     author = "PTY",
     markdownFileName = "Opentodt.md"
@@ -67,6 +67,12 @@ import org.powbot.mobile.service.ScriptUploader
             "Idle at 500", "Idle at 500", OptionType.BOOLEAN
         ),
         ScriptConfiguration(
+            "Open crates", "Open crates just before banking", OptionType.BOOLEAN
+        ),
+        ScriptConfiguration(
+            "Upgrade gear", "Uprgrades warm gear", OptionType.BOOLEAN
+        ),
+        ScriptConfiguration(
             "Snowfall safespot", "Uses the snowfall safespot for cutting/fletching", OptionType.BOOLEAN
         ),
     ]
@@ -81,16 +87,18 @@ class Script : TreeScript() {
     lateinit var status: Status
 
     override fun onStart() {
-        val food = getOption<String>("Food")!!
-        val logsOnly = getOption<Boolean>("Logs only")!!
-        val idleAt500 = getOption<Boolean>("Idle at 500")!!
-        val location = WintertodtLocation.valueOf(getOption<String>("Location")!!)
-        val minimumFood = getOption<Int>("MinFood")!!
-        val bankFood = getOption<Int>("BankFood")!!
-        val snowfallSafespot = getOption<Boolean>("Snowfall safespot")!!
+        val food = getOption<String>("Food")
+        val logsOnly = getOption<Boolean>("Logs only")
+        val idleAt500 = getOption<Boolean>("Idle at 500")
+        val location = WintertodtLocation.valueOf(getOption("Location"))
+        val minimumFood = getOption<Int>("MinFood")
+        val bankFood = getOption<Int>("BankFood")
+        val snowfallSafespot = getOption<Boolean>("Snowfall safespot")
+        val openCrates = getOption<Boolean>("Open crates")
+        val upgradeGear = getOption<Boolean>("Upgrade gear")
 
         configuration = Configuration(
-            food, bankFood, minimumFood, location, logsOnly, idleAt500, snowfallSafespot
+            food, bankFood, minimumFood, location, logsOnly, idleAt500, snowfallSafespot, openCrates, upgradeGear
         )
         status = Status(configuration.startingLocation)
         addPaint()
@@ -143,7 +151,6 @@ class Script : TreeScript() {
         SystemMessageManager.messageRecieved(messageEvent)
     }
 
-
     /**
      *  This will only let the script break when its not in a game currently
      */
@@ -161,5 +168,5 @@ class Script : TreeScript() {
 }
 
 fun main(args: Array<String>) {
-    ScriptUploader().uploadAndStart("Opentodt", "", "emulator-5566", true, false)
+    ScriptUploader().uploadAndStart("Opentodt", "", "127.0.0.1:5625", true, false)
 }

@@ -4,7 +4,6 @@ import org.powbot.api.event.MessageEvent
 import java.util.logging.Logger
 
 object SystemMessageManager {
-    private var logger: Logger = Logger.getLogger(this.javaClass.simpleName)
     private var listeners = mutableListOf<MessageListener>()
 
     fun addMessageToListen(messageListener: MessageListener) {
@@ -22,7 +21,6 @@ object SystemMessageManager {
             }
         }
         val currentTime = System.currentTimeMillis()
-        val startingCount = listeners.count()
         listeners.removeAll { it.count <= 0 || it.expireTime + it.time <= currentTime }
     }
 }
