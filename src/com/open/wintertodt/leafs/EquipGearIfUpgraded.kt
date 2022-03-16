@@ -16,8 +16,8 @@ class EquipGearIfUpgraded(script: Script) : Leaf<Script>(script, "Upgrading gear
         val pyroInventory = Inventory.stream().name(*OpenWintertodtConstants.ITEMS_PYROMANCER).toList()
 
         pyroInventory.forEach {
-            if (!equipment.contains(it)) {
-                logger.info("Attempting to equip $equipment")
+            if (!equipment.any { eq -> eq.name() == it.name() }) {
+                logger.info("Attempting to equip ${it.name()}")
                 if (it.interact("Wear")) {
                     Condition.wait { !it.valid() }
                 }

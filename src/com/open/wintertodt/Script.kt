@@ -70,7 +70,7 @@ import org.powbot.mobile.service.ScriptUploader
             "Open crates", "Open crates just before banking", OptionType.BOOLEAN
         ),
         ScriptConfiguration(
-            "Upgrade gear", "Uprgrades warm gear", OptionType.BOOLEAN
+            "Upgrade gear", "Upgrades warm gear", OptionType.BOOLEAN
         ),
         ScriptConfiguration(
             "Snowfall safespot", "Uses the snowfall safespot for cutting/fletching", OptionType.BOOLEAN

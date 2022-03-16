@@ -33,7 +33,11 @@ class ExitArena(script: Script) : Leaf<Script>(script, "Exiting arena") {
         }
 
         if (door.inViewport() && door.interact(ACTION_ENTER)) {
-            Condition.wait({ !AREA_INSIDE_ARENA.contains(Players.local()) }, 1000, 10)
+            val outside = Condition.wait({ !AREA_INSIDE_ARENA.contains(Players.local()) }, 1000, 10)
+            if (outside){
+                // Random sleep outside since it gives a black fade which prevents anything being done.
+                Condition.sleep(Random.nextInt(1500, 3000))
+            }
         }
     }
 }

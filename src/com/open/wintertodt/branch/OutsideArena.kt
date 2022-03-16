@@ -10,6 +10,7 @@ import org.powbot.api.rt4.Equipment
 import org.powbot.api.rt4.Inventory
 import org.powbot.api.script.tree.Branch
 import org.powbot.api.script.tree.TreeComponent
+import java.util.logging.Logger
 
 class HasFood(script: Script) : Branch<Script>(script, "Has required food") {
     override val successComponent: TreeComponent<Script> = EnterArena(script)
@@ -51,7 +52,7 @@ class HasGearToEquip(script: Script) : Branch<Script>(script, "Has gear to equip
         val pyroInventory = Inventory.stream().name(*ITEMS_PYROMANCER).toList()
 
         pyroInventory.forEach {
-            if (!equipment.contains(it)) {
+            if (!equipment.any { eq -> eq.name() == it.name() }) {
                 return true
             }
         }
