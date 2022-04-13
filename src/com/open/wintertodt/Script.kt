@@ -29,7 +29,7 @@ import org.powbot.mobile.service.ScriptUploader
 @ScriptManifest(
     name = "Opentodt",
     description = "Does wintertodt.",
-    version = "1.0.3",
+    version = "1.0.4",
     category = ScriptCategory.Firemaking,
     author = "PTY",
     markdownFileName = "Opentodt.md"
@@ -43,7 +43,8 @@ import org.powbot.mobile.service.ScriptUploader
         ScriptConfiguration(
             "Food", "Food you wish to eat if required", OptionType.STRING,
             "",
-            ["",
+            [
+                "",
                 "Shrimps", "Cooked chicken", "Cooked meat", "Sardine", "Bread", "Herring",
                 "Mackerel", "Choc-ice", "Trout", "Cod", "Pike", "Roast beast meat", "Pineapple punch",
                 "Salmon", "Tuna", "Jug of wine", "Rainbow fish", "Stew", "Cake", "Meat pie",
@@ -51,7 +52,7 @@ import org.powbot.mobile.service.ScriptUploader
                 "Chocolate cake", "Tangled toads' legs", "Potato with cheese", "Meat pizza",
                 "Monkfish", "Anchovy pizza", "Cooked karambwan", "Curry", "Ugthanki kebab", "Mushroom potato",
                 "Shark", "Sea turtle", "Pineapple pizza", "Summer pie", "Manta ray", "Tuna potato", "Dark crab",
-                "Anglerfish"
+                "Anglerfish", "Saradomin brew(3)", "Saradomin brew(4)",
             ]
         ),
         ScriptConfiguration(

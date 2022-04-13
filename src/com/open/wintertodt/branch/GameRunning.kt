@@ -2,6 +2,7 @@ package com.open.wintertodt.branch
 
 import com.open.wintertodt.OpenWintertodtConstants
 import com.open.wintertodt.OpenWintertodtConstants.AREA_NEAR_DOOR
+import com.open.wintertodt.OpenWintertodtConstants.ITEMS_USELESS
 import com.open.wintertodt.OpenWintertodtConstants.ITEM_BRUMA_KINDLING
 import com.open.wintertodt.OpenWintertodtConstants.ITEM_BRUMA_ROOT
 import com.open.wintertodt.Script
@@ -12,8 +13,12 @@ import com.open.wintertodt.helpers.CommonMethods.remainingHealthPercentage
 import com.open.wintertodt.helpers.FoodHelper
 import com.open.wintertodt.helpers.PointHelper.getPointsContributed
 import com.open.wintertodt.leafs.*
-import org.powbot.api.rt4.*
+import org.powbot.api.Condition
+import org.powbot.api.rt4.Inventory
+import org.powbot.api.rt4.Players
+import org.powbot.api.rt4.Varpbits
 import org.powbot.api.script.tree.Branch
+import org.powbot.api.script.tree.SimpleLeaf
 import org.powbot.api.script.tree.TreeComponent
 import java.util.logging.Logger
 
@@ -38,10 +43,26 @@ class ShouldIdleAtFiveHundred(script: Script) : Branch<Script>(script, "Should i
 
 class NeedsToEat(script: Script) : Branch<Script>(script, "Needs to eat") {
     override val successComponent: TreeComponent<Script> = HasFoodToEat(script)
-    override val failedComponent: TreeComponent<Script> = ShouldStayInSafeZone(script)
+    override val failedComponent: TreeComponent<Script> = DropUselessItems(script)
 
     override fun validate(): Boolean {
         return FoodHelper.needToEat(script)
+    }
+}
+
+class DropUselessItems(script: Script) : Branch<Script>(script, "Drop useless items?") {
+    override val successComponent: TreeComponent<Script> = SimpleLeaf(script, "Dropping useless items") {
+        val items = Inventory.stream().name(*ITEMS_USELESS).toList()
+        items.forEach {
+            if (it.interact("Drop")) {
+                Condition.wait { !it.valid() }
+            }
+        }
+    }
+    override val failedComponent: TreeComponent<Script> = ShouldStayInSafeZone(script)
+
+    override fun validate(): Boolean {
+        return Inventory.count(*ITEMS_USELESS) > 0
     }
 }
 

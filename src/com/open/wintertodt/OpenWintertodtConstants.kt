@@ -52,6 +52,8 @@ object OpenWintertodtConstants {
     const val OBJECT_BURNING_BRAZIER = "Burning brazier"
     const val OBJECT_DOOR = "Doors of Dinh"
 
+    val ITEMS_USELESS = arrayOf("Jug","Vial")
+
     val TILE_NEAR_DOOR_OUTSIDE = Tile(1630, 3963, 0)
     val TILE_NEAR_DOOR_INSIDE = Tile(1629, 3968, 0)
 
